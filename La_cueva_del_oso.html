@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Cueva del Oso</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: "Roboto", Arial, sans-serif;
+    background: #0f0f0f;
+    color: #fff;
+}
+
+/* ---------------- HEADER ---------------- */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 25px;
+    background: #0d0d0d;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 1.6rem;
+    font-weight: bold;
+    background: linear-gradient(90deg, #E50914, #8A2BE2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hamburger {
+    width: 35px;
+    cursor: pointer;
+}
+
+.hamburger span {
+    height: 4px;
+    width: 100%;
+    background: #fff;
+    margin: 6px 0;
+    display: block;
+    border-radius: 5px;
+}
+
+/* ---------------- MENU LATERAL ---------------- */
+.menu {
+    position: fixed;
+    top: 0;
+    right: -230px;
+    width: 230px;
+    height: 100%;
+    background: #111;
+    padding-top: 80px;
+    transition: 0.4s;
+}
+
+.menu.open {
+    right: 0;
+}
+
+.menu a {
+    display: block;
+    padding: 18px;
+    text-decoration: none;
+    color: white;
+    border-bottom: 1px solid #222;
+    font-size: 1.1rem;
+}
+
+.menu a:hover {
+    background: linear-gradient(90deg, #E50914, #8A2BE2);
+}
+
+/* ---------------- CARRUSEL MEJORADO ---------------- */
+.carousel {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    margin-top: 10px;
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.carousel-item {
+    min-width: 100%;
+    position: relative;
+}
+
+.carousel-item img {
+    width: 100%;
+    height: 420px; /* Más alto para mejor calidad */
+    object-fit: cover;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.8);
+}
+
+/* BOTONES DEL CARRUSEL */
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.55);
+    border: none;
+    color: white;
+    padding: 14px;
+    cursor: pointer;
+    font-size: 24px;
+    border-radius: 50%;
+}
+
+.prev { left: 15px; }
+.next { right: 15px; }
+
+.carousel-btn:hover {
+    background: rgba(0,0,0,0.85);
+}
+
+/* ---------------- TITULOS CENTRADOS ---------------- */
+.section-title {
+    margin: 25px 0;
+    font-size: 1.8rem;
+    text-align: center;
+}
+
+/* ---------------- DESCRIPCIÓN ---------------- */
+.carousel-description {
+    padding: 20px;
+    font-size: 1.15rem;
+    color: #ccc;
+    text-align: center;
+    max-width: 800px;
+    margin: auto;
+}
+
+/* ---------------- GRID CENTRADO ---------------- */
+.grid {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 25px;
+    padding: 0 25px 40px;
+    max-width: 1100px;
+    margin: auto;
+}
+
+/* ---------------- CARDS ---------------- */
+.card {
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.25s, box-shadow 0.25s;
+    text-align: center;
+}
+
+.card img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.card:hover {
+    transform: scale(1.07);
+    box-shadow: 0 0 15px #8A2BE2, 0 0 25px #E50914;
+}
+
+.card-title {
+    margin-top: 6px;
+    font-size: 1rem;
+}
+
+a.card {
+    text-decoration: none; 
+    color: inherit;
+    display: block;
+}
+
+/* ---------------- SECCIONES ---------------- */
+section {
+    display: none;
+}
+section.active {
+    display: block;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">La Cueva del Oso</div>
+
+    <div class="hamburger" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <nav class="menu" id="menu">
+        <a href="#" onclick="showSection('peliculas')">Películas</a>
+        <a href="#" onclick="showSection('series')">Series</a>
+    </nav>
+</header>
+
+<!-- ------------------------ PELICULAS ------------------------ -->
+<section id="peliculas" class="active">
+
+    <h2 class="section-title">Películas destacadas</h2>
+
+    <div class="carousel">
+        <button class="carousel-btn prev" onclick="moveSlide(-1)">❮</button>
+
+        <div class="carousel-track" id="carouselTrack">
+
+            <div class="carousel-item">
+                <img src="inter.webp" alt="">
+            </div>
+
+            <div class="carousel-item">
+                <img src="UnaP.webp" alt="">
+            </div>
+
+            <div class="carousel-item">
+                <img src="images.jpeg" alt="">
+            </div>
+
+        </div>
+
+        <button class="carousel-btn next" onclick="moveSlide(1)">❯</button>
+    </div>
+
+    <div class="carousel-description">
+        Bienvenido a nuestra zona de estrenos. Aquí encontrarás las películas más destacadas del momento, 
+        seleccionadas especialmente para ti. Disfruta de acción, drama, comedia y mucho más.
+        Selecciona la película que gustes ver y te redireccionará a ella.
+    </div>
+
+    <h2 class="section-title">Películas</h2>
+
+    <div class="grid">
+
+        <a href="https://www.youtube.com/watch?v=VrK5xgAkjLA" class="card" target="_blank">
+            <img src="inter.webp" alt="">
+            <div class="card-title">Interstellar</div>
+        </a>
+
+        <a href="https://www.youtube.com/watch?v=h_zUuj81jH4&t=56s" class="card" target="_blank">
+            <img src="UnaP.webp" alt="">
+            <div class="card-title">Una película de huevos</div>
+        </a>
+
+        <a href="https://www.youtube.com/watch?v=ntWubYHsVs0" class="card" target="_blank">
+            <img src="images.jpeg" alt="">
+            <div class="card-title">La leyenda del Charro Negro</div>
+        </a>
+
+        <a href="https://www.youtube.com/watch?v=dgU3nLZnIlI" class="card" target="_blank">
+            <img src="La_llorona.jpeg" alt="">
+            <div class="card-title">La leyenda de la Llorona</div>
+        </a>
+
+        <a href="https://www.youtube.com/watch?v=kiuzK0B4WYs" class="card" target="_blank">
+            <img src="La nahuala.webp" alt="">
+            <div class="card-title">La leyenda de la Nahuala</div>
+        </a>
+
+    </div>
+
+</section>
+
+<!-- ------------------------ SERIES ------------------------ -->
+<section id="series">
+
+    <h2 class="section-title">Series</h2>
+
+    <div class="grid">
+
+        <div class="card">
+            <img src="Yellowstone.jpg" alt="">
+            <div class="card-title">Yellowstone</div>
+        </div>
+
+        <div class="card">
+            <img src="vikingos.jpg" alt="">
+            <div class="card-title">Vikingos</div>
+        </div>
+
+        <div class="card">
+            <img src="juego-de-tronos.jpg" alt="">
+            <div class="card-title">Juego de Tronos</div>
+        </div>
+
+        <div class="card">
+            <img src="hora-de-aventuras.jpg" alt="">
+            <div class="card-title">Hora de Aventuras</div>
+        </div>
+
+    </div>
+
+</section>
+
+<script>
+function toggleMenu() {
+    document.getElementById("menu").classList.toggle("open");
+}
+
+function showSection(section) {
+    document.querySelectorAll("section").forEach(s => s.classList.remove("active"));
+    document.getElementById(section).classList.add("active");
+    toggleMenu();
+}
+
+let index = 0;
+
+function moveSlide(direction) {
+    const track = document.getElementById("carouselTrack");
+    const total = document.querySelectorAll(".carousel-item").length;
+
+    index = (index + direction + total) % total;
+
+    track.style.transform = `translateX(-${index * 100}%)`;
+}
+</script>
+
+</body>
+</html>
